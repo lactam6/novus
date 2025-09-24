@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_レイヤー_2" data-name="レイヤー 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 268.09 98.25">
+  <defs>
+    <style>
+      .cls-1, .cls-2 {
+        fill: #fafafa;
+      }
+
+      .cls-2 {
+        font-family: BellMTBold, 'Bell MT';
+        font-size: 72px;
+      }
+
+      .cls-3, .cls-4 {
+        fill: none;
+      }
+
+      .cls-4 {
+        stroke: #fafafa;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
+      }
+    </style>
+  </defs>
+  <g id="_レイヤー_1-2" data-name="レイヤー 1">
+    <g>
+      <rect class="cls-3" width="268.09" height="98.25"/>
+      <g>
+        <text class="cls-2" transform="translate(80.23 73.29)"><tspan x="0" y="0">ovus</tspan></text>
+        <text class="cls-2" transform="translate(28.75 73.29)"><tspan x="0" y="0">N</tspan></text>
+        <g>
+          <line class="cls-1" x1="29.49" y1="27.76" x2="221.14" y2="27.78"/>
+          <g>
+            <line class="cls-4" x1="29.49" y1="27.76" x2="215.17" y2="27.78"/>
+            <polygon class="cls-1" points="212.36 31.48 213.93 27.78 212.36 24.08 221.14 27.78 212.36 31.48"/>
+          </g>
+        </g>
+        <text/>
+      </g>
+    </g>
+  </g>
+</svg>

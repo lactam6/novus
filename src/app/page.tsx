@@ -3,8 +3,10 @@ import {LeftBar} from "@/components/leftbar/page";
 export default function Home() {
   return (
     <>
-    <LeftBar />
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen pb-20 gap-16">
+    <LeftBar/>
+    <main className="bg-neutral-50 w-screen h-screen">
+    </main>
+    {/* <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen pb-20 gap-16">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <Image
           className="dark:invert"
@@ -100,7 +102,7 @@ export default function Home() {
           Go to nextjs.org →
         </a>
       </footer>
-    </div>
+    </div> */}
     </>
   );
 }
