@@ -1,10 +1,10 @@
-'use client';
+import Image from 'next/image'
+import {getServerSession} from 'next-auth'
+import { authOptions } from '@/app/api/auth/[...nextauth]/route'
+import SessionTip from '@/components/sessionTip/page'
 
-import Image from 'next/image';
-import { useSession, signIn, signOut } from 'next-auth/react';
-
-export default function Home() {
-  const { data: session } = useSession();
+export default async function Home() {
+  const session = await getServerSession(authOptions)
 
   return (
     <main className='flex min-h-screen flex-col items-center justify-between p-24'>
@@ -13,22 +13,7 @@ export default function Home() {
           Hello&nbsp;
           <code className='font-mono font-bold'>{session?.user?.name ?? 'guest'}</code>
         </p>
-        {!session && (
-          <button
-            onClick={() => signIn()}
-            className='flex w-full justify-center border-2 border-b border-red-300 hover:border-red-400 bg-red-200 hover:bg-red-300 pb-6 pt-8 backdrop-blur-2xl dark:border-red-800 dark:hover:border-red-900 dark:bg-red-800/50 dark:hover:bg-red-900/30 lg:static lg:w-auto lg:rounded-xl lg:p-4'
-          >
-            Sign In
-          </button>
-        )}
-        {session && (
-          <button
-            onClick={() => signOut()}
-            className='flex w-full justify-center border-2 border-b border-green-300 bg-green-200 pb-6 pt-8 backdrop-blur-2xl dark:border-green-800 dark:bg-green-800/30 lg:static lg:w-auto lg:rounded-xl lg:p-4 hover:border-green-400 hover:bg-green-300 dark:hover:border-green-900 dark:hover:bg-green-900/30'
-          >
-            Sign Out
-          </button>
-        )}
+        <SessionTip session={session} />
         <div className='fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none'>
           <a
             className='pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0'
@@ -130,5 +115,5 @@ export default function Home() {
         </a>
       </div>
     </main>
-  );
+  )
 }
