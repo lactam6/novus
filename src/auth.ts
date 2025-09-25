@@ -1,36 +1,37 @@
 import NextAuth from "next-auth"
 import GitHub from "next-auth/providers/github"
 
-import Credentials from "next-auth/providers/credentials"
 import type {Provider} from "next-auth/providers"
+import CredentialsProvider from "next-auth/providers/credentials"
 
-const providers: Provider[] = [
-  Credentials({
-    credentials: { password: { label: "Password", type: "password" } },
-    authorize(c) {
-      if(c.password !== "password") return null
-      return {
-        id: "test",
-        name: "Test User",
-        email: "test@example.com"
-      }
+export const { auth } = NextAuth({
+  providers: [
+    CredentialsProvider({
+      async authorize(credentials) {
+        const user = await db.user.findUnique({
+          where: { email: credentials.email },
+        })
+        if (!user) return null
+
+        return {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          role: user.role, // ← role をセッションに含める
+        }
+      },
+    }),
+  ],
+  callbacks: {
+    async session({ session, token }) {
+      session.user.role = token.role as string
+      return session
     },
-  }),
-  GitHub,
-]
-
-export const providerMap = providers.map((provider) => {
-  if(typeof provider === "function"){
-    const providerData = provider()
-    return { id: providerData.id, name: providerData.name }
-  } else {
-    return { id: provider.id, name: provider.name }
-  }
-}).filter((provider) => provider.id !== "credentials")
-
-export const { handlers, signIn, signOut, auth } = NextAuth({
-  providers: [GitHub],
-  pages: {
-    signIn: "@/app/auth/login"
-  }
+    async jwt({ token, user }) {
+      if (user) {
+        token.role = (user as any).role
+      }
+      return token
+    },
+  },
 })
