@@ -20,7 +20,6 @@ export default function CardDemo() {
           Enter your email below to login to your account
         </CardDescription>
         <CardAction>
-          <Button variant="link">Sign Up</Button>
         </CardAction>
       </CardHeader>
       <CardContent>
