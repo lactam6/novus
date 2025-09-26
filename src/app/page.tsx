@@ -1,6 +1,7 @@
 import { UnmovableHeader } from '@/components/header/unmovable';
 import {Button} from "@/components/ui/button"
 import "./patterns.css"
+import Link from 'next/link'
 export const dynamic = 'force-dynamic';
 export default function Home() {
   return (
@@ -10,10 +11,10 @@ export default function Home() {
         <div className="h-100 w-full mx-auto px-4 sm:px-6 lg:px-8 py-24  p-0 space-y-8">
           <div className="flex justify-center">
             <a className="group inline-flex items-center bg-white/10 hover:bg-white/10 border border-white/10 p-1 ps-4 rounded-full shadow-md focus:outline-hidden focus:bg-white/10" href="/error">
-              <p className="me-2 text-white text-sm">
+              <p className="me-2 text-white text-sm hover:cursor-pointer shadow-md">
                 See what you can do with Novus
               </p>
-              <span className="group-hover:bg-white/10 py-1.5 px-2.5 flex justify-center items-center gap-x-2 rounded-full bg-white/10 font-semibold text-white text-sm">
+              <span className="group-hover:bg-white/10 py-1.5 px-2.5 flex justify-center items-center gap-x-2 rounded-full bg-white/10 font-semibold text-white text-sm hover:cursor-pointer shadow-md">
                 <svg
                   className="shrink-0 size-4"
                   xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +42,9 @@ export default function Home() {
             <p className="text-lg text-neutral-50">currency, notes and... explosion!</p>
           </div>
           <div className="text-center">
-            <Button className="shadow-md  text-neutral-100"> Sign up for free </Button>
+            <Link href="/auth/signup" className=''>
+              <Button className=" text-neutral-100 hover:cursor-pointer shadow-md"> Sign up for free </Button>
+            </Link>
           </div>
         </div>
       </div>

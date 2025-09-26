@@ -6,6 +6,8 @@ import {FaGear} from "react-icons/fa6"
 import {Button} from "@/components/ui/button"
 import { signOut } from "next-auth/react"
 import { useState } from 'react';
+import { SignOutButton } from '@/components/ui/signOutButton'; 
+
 export function LeftBar() {
   const [isOpen, setIsOpen] = useState(false);
   function handleToggle() {
@@ -50,8 +52,7 @@ export function LeftBar() {
             action={async () => {
               await signOut()
             }}
-          >
-            <Button variant="outline" className="w-full" type="submit">Sign Out</Button>
+          ><SignOutButton /> 
           </form>
   </div>
 </div>
@@ -74,7 +75,7 @@ export function LeftBar() {
               await signOut()
             }}
           >
-            <Button variant="outline" className="w-full" type="submit">Sign Out</Button>
+            <SignOutButton />
           </form>
         </div>
       </div>
