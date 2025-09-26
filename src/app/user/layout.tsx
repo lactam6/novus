@@ -1,4 +1,7 @@
 import { auth } from "@/auth"
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
+import "../globals.css";
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
   const session = await auth()
@@ -10,3 +13,12 @@ export default async function Layout({ children }: { children: React.ReactNode }
     </div>
   )
 }
+export const metadata: Metadata = {
+  title: "Novus",
+  description: "Home",
+  icons: {
+    icon: '/icon.png', 
+    shortcut: '/icon.png',
+    apple: '/icon.png',
+  }
+};

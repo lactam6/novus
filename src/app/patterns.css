@@ -1,0 +1,8 @@
+.pattern1{
+background-image: 
+          linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px)
+                ;
+        background-size: 39px 39px;
+        background-position: -1px -1px;
+}
