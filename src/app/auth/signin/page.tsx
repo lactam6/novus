@@ -12,6 +12,7 @@ export default function Home() {
                                 height={60}
                                 priority
                               />
+                              
         </div>
         <div className="h-full w-full justify-items-center items-center grid">
             <CardDemo authtype="Sign In"/>
