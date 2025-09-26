@@ -13,11 +13,16 @@ import Image from "next/image";
 import { FormEvent } from 'react'; // フォームイベントの型
 import { signIn } from "next-auth/react"; 
 import { useSearchParams } from 'next/navigation'; // Next.jsからインポート
-export default function CardDemo() {
+interface CardDemoProps {
+  // authtypeというプロパティは文字列型（string）である
+  authtype: string; 
+  // 他に受け取るプロパティがあればここに追加
+  // example?: number; // オプショナルの場合は ? をつける
+}
+export function CardDemo(props: CardDemoProps) {
   const searchParams = useSearchParams();
   // 💡 URLから callbackUrl を取得し、なければ '/user/home' をデフォルトに
   const callbackUrl = searchParams.get('callbackUrl') || '/user/home'; 
-
   const handleSignIn = (e: FormEvent) => {
     e.preventDefault(); 
     
@@ -29,7 +34,7 @@ export default function CardDemo() {
     <Card className="w-full max-w-sm">
       <CardHeader>
         <div className="justify-items-center">
-        <CardTitle>Login to your account</CardTitle>
+        <CardTitle>{props.authtype} your account</CardTitle>
         </div>
         <CardDescription>
           Use Google Authentication to access to your account
@@ -51,7 +56,7 @@ export default function CardDemo() {
       </CardContent>
       <CardFooter className="flex-col gap-2">
         <form className="w-full" onSubmit={handleSignIn}>
-          <Button type="submit" variant="outline" className="w-full" >Signin, or Login with Google</Button>
+          <Button type="submit" variant="outline" className="w-full" >{props.authtype} with Google</Button>
         </form>
       </CardFooter>
     </Card>

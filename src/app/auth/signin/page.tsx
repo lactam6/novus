@@ -1,4 +1,4 @@
-import CardDemo from "@/components/login/page";
+import {CardDemo} from "@/components/login/page";
 import Image from "next/image";
 export default function Home() {
   return (
@@ -14,7 +14,7 @@ export default function Home() {
                               />
         </div>
         <div className="h-full w-full justify-items-center items-center grid">
-            <CardDemo />
+            <CardDemo authtype="Sign In"/>
         </div>
     </div>
   );
