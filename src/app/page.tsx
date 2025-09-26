@@ -1,6 +1,7 @@
 import { UnmovableHeader } from '@/components/header/unmovable';
 import {Button} from "@/components/ui/button"
 import "./patterns.css"
+export const dynamic = 'force-dynamic';
 export default function Home() {
   return (
     <div className="overflow-x-hidden">
