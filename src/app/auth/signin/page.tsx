@@ -2,6 +2,8 @@
 
 import { CardDemo } from "@/components/login/page";
 import Image from "next/image";
+import { Suspense } from 'react'; // 💡 Suspense をインポート
+
 // ロード中に表示するコンポーネントを定義（簡潔なHTML要素でOK）
 const LoadingFallback = () => (
   <div className="h-full w-full justify-items-center items-center grid">
