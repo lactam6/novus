@@ -1,5 +1,3 @@
-import Image from "next/image";
-import {LeftBar} from "@/components/leftbar/page";
 import { UnmovableHeader } from '@/components/header/unmovable';
 import {Button} from "@/components/ui/button"
 import "./patterns.css"

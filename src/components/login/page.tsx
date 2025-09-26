@@ -9,11 +9,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import Image from "next/image";
 import { FormEvent } from 'react'; // フォームイベントの型
-import { signIn, signOut } from "next-auth/react"; 
+import { signIn } from "next-auth/react"; 
 import { useSearchParams } from 'next/navigation'; // Next.jsからインポート
 export default function CardDemo() {
   const searchParams = useSearchParams();
