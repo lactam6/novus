@@ -10,52 +10,52 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import Image from "next/image";
+
+import { signIn, signOut } from "@/auth"
 
 export default function CardDemo() {
   return (
     <Card className="w-full max-w-sm">
       <CardHeader>
+        <div className="justify-items-center">
         <CardTitle>Login to your account</CardTitle>
+        </div>
         <CardDescription>
-          Enter your email below to login to your account
+          Use Google Authentication to access to your account
         </CardDescription>
         <CardAction>
         </CardAction>
       </CardHeader>
       <CardContent>
-        <form>
-          <div className="flex flex-col gap-6">
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="m@example.com"
-                required
-              />
-            </div>
-            <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
-                <a
-                  href="#"
-                  className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                >
-                  Forgot your password?
-                </a>
-              </div>
-              <Input id="password" type="password" required />
-            </div>
-          </div>
-        </form>
+        <div className="justify-items-center">
+        <Image
+                                        className=""
+                                        src="/N.svg"
+                                        alt="novus logo"
+                                        width={200}
+                                        height={200}
+                                        priority
+                                      />
+        </div>
       </CardContent>
       <CardFooter className="flex-col gap-2">
-        <Button type="submit" className="w-full">
-          Login
-        </Button>
-        <Button variant="outline" className="w-full">
-          or, Sign up
-        </Button>
+        <form className="w-full"
+          action={async () => {
+            "use server"
+            await signIn("google", { redirectTo: "/" })
+          }}
+        >
+          <Button type="submit" variant="outline" className="w-full" >Signin, or Login with Google</Button>
+        </form>
+        <form
+          action={async () => {
+            "use server"
+            await signOut()
+          }}
+        >
+          <Button variant="outline" className="w-full" type="submit">Sign Out</Button>
+        </form>
       </CardFooter>
     </Card>
   )

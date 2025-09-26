@@ -1,5 +1,6 @@
 import CardDemo from "@/components/login/page";
 import Image from "next/image";
+import { signIn } from "@/auth"
 export default function Home() {
   return (
     <div className="grid grid-rows-[150_500] md:grid-rows-none md:grid-cols-2 h-screen w-screen">

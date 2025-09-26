@@ -6,9 +6,12 @@ import {FaGear} from "react-icons/fa6"
 import { useState } from 'react';
 export function LeftBar() {
   const [isOpen, setIsOpen] = useState(false);
-  function handleToggle(){
-    setIsOpen(isOpen => !isOpen);
-    console.log(isOpen)
+  function handleToggle() {
+    setIsOpen(prev => {
+      const newState = !prev;
+      console.log(newState);
+      return newState;
+    });
   }
   return (
     <div>
@@ -16,7 +19,7 @@ export function LeftBar() {
         <div className='h-16 w-screen relative grid grid-cols-[200px_1fr_100px] items-center justify-items-center'>
           <Image
                     className=""
-                    src="./nobackicon.svg"
+                    src="/nobackicon.svg"
                     alt="novus logo"
                     width={128}
                     height={30}
@@ -38,7 +41,7 @@ export function LeftBar() {
   <div
     className={`
       transition-all duration-300 transform w-screen bg-neutral-50 rounded-t-3xl fixed z-20 
-      ${isOpen ? 'bottom-0 h-5/8' : '-bottom-full h-5/8'}
+      ${isOpen ? 'bottom-0 h-3/5' : '-bottom-full h-5/8'}
     `}
   >
   </div>
