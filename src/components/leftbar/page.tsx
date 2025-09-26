@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from 'next/link'
 import {FaSearch, FaHome, FaBell} from "react-icons/fa"
 import {FaGear} from "react-icons/fa6"
+import {Button} from "@/components/ui/button"
+import { signOut } from "next-auth/react"
 import { useState } from 'react';
 export function LeftBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,6 +46,13 @@ export function LeftBar() {
       ${isOpen ? 'bottom-0 h-3/5' : '-bottom-full h-5/8'}
     `}
   >
+          <form
+            action={async () => {
+              await signOut()
+            }}
+          >
+            <Button variant="outline" className="w-full" type="submit">Sign Out</Button>
+          </form>
   </div>
 </div>
       <div className="hidden md:block w-52 h-screen fixed bg-red-900 items-center justify-items-center">
@@ -60,6 +69,13 @@ export function LeftBar() {
           <Link href="/" className=' text-neutral-50 flex gap-2 items-center'><FaSearch/> Search</Link>
           <Link href="/" className=' text-neutral-50 flex gap-2 items-center'><FaBell/>Notifs</Link>
           <Link href="/" className=' text-neutral-50 flex gap-2 items-center'><FaGear/>Settings</Link>
+          <form
+            action={async () => {
+              await signOut()
+            }}
+          >
+            <Button variant="outline" className="w-full" type="submit">Sign Out</Button>
+          </form>
         </div>
       </div>
     </div>

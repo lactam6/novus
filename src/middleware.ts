@@ -1,6 +1,6 @@
 import { auth } from "@/auth"
 import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { NextRequest } from "next/server";
 
 export async function middleware(req: NextRequest) {
   const session = await auth()
@@ -9,12 +9,14 @@ export async function middleware(req: NextRequest) {
   // 1. 公開ページ（例外）
   if (
     pathname === "/" ||
-    pathname.startsWith("/auth/login") ||
     pathname.startsWith("/error") ||
-    pathname.startsWith("/api/signup") || // OAuth 用
-    pathname.startsWith("/api/signin") // OAuth 用
-  ) {
-    return NextResponse.next()
+    pathname.startsWith("/api/auth")){
+      return NextResponse.next()
+    }
+    // /auth/signin, /auth/signupでサインインされている場合はhomeに移動
+  if ( pathname.startsWith("/auth/signin") || pathname.startsWith("/auth/signup")) {
+    if (session) return NextResponse.redirect(new URL("/user/home", req.url));
+    else return NextResponse.next();
   }
 
   // 2. /app直下のページは全て禁止
@@ -25,7 +27,7 @@ export async function middleware(req: NextRequest) {
   // 3. /user/** はサインイン必須
   if (pathname.startsWith("/user")) {
     if (!session) {
-      const loginUrl = new URL("/auth/login", req.url)
+      const loginUrl = new URL("/auth/signin", req.url)
       loginUrl.searchParams.set("callbackUrl", pathname)
       return NextResponse.redirect(loginUrl)
     }

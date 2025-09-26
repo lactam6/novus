@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -11,10 +12,21 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import Image from "next/image";
-
-import { signIn, signOut } from "@/auth"
-
+import { FormEvent } from 'react'; // フォームイベントの型
+import { signIn, signOut } from "next-auth/react"; 
+import { useSearchParams } from 'next/navigation'; // Next.jsからインポート
 export default function CardDemo() {
+  const searchParams = useSearchParams();
+  // 💡 URLから callbackUrl を取得し、なければ '/user/home' をデフォルトに
+  const callbackUrl = searchParams.get('callbackUrl') || '/user/home'; 
+
+  const handleSignIn = (e: FormEvent) => {
+    e.preventDefault(); 
+    
+    // 💡 取得した callbackUrl を signIn 関数に渡す
+    signIn("google", { callbackUrl: callbackUrl }); 
+    // ※ next-auth/react の signIn は 'redirectTo' ではなく 'callbackUrl' をオプションとして受け付けます
+  };
   return (
     <Card className="w-full max-w-sm">
       <CardHeader>
@@ -40,21 +52,8 @@ export default function CardDemo() {
         </div>
       </CardContent>
       <CardFooter className="flex-col gap-2">
-        <form className="w-full"
-          action={async () => {
-            "use server"
-            await signIn("google", { redirectTo: "/" })
-          }}
-        >
+        <form className="w-full" onSubmit={handleSignIn}>
           <Button type="submit" variant="outline" className="w-full" >Signin, or Login with Google</Button>
-        </form>
-        <form
-          action={async () => {
-            "use server"
-            await signOut()
-          }}
-        >
-          <Button variant="outline" className="w-full" type="submit">Sign Out</Button>
         </form>
       </CardFooter>
     </Card>
