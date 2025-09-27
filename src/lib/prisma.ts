@@ -13,4 +13,7 @@ export const prisma =
     log: ["query"],
   }).$extends(withAccelerate()); // 👈 ここに .\$extends(withAccelerate()) を追加
 
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma as any;
+if (process.env.NODE_ENV !== "production") {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any 
+  globalForPrisma.prisma = prisma as any;
+}
