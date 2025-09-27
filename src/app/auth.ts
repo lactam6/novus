@@ -2,24 +2,26 @@
 import NextAuth from "next-auth"
 import Google from "next-auth/providers/google"
 // データベースアダプターを使用している場合は、ここでインポート
-// import { PrismaAdapter } from "@auth/prisma-adapter"
-// import { prisma } from "./prisma" // あなたのPrismaクライアント
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { prisma } from "@/lib/prisma"; 
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  // adapter: PrismaAdapter(prisma), // アダプターの使用例
+  adapter: PrismaAdapter(prisma), // アダプターの使用例
+  session: {
+    strategy: "jwt",
+    maxAge: 1 * 60 * 60,
+  },
   providers: [Google],
   callbacks: {
     // 1. サインイン時、userからidとroleをtokenにコピー
-    jwt({token, user}){
+    jwt({token, user, account, profile}){
       if(user){
         // userはサインイン時などに存在。データベースから取得した
         // 拡張された型（user.id, user.role）が含まれている想定
-        token.id = String(user.id)
+        token.userId = user.id;
         // user.roleがnullまたはundefinedの場合に備えてオプショナルアクセス(?)や
         // デフォルト値を設定するなどの配慮も検討してもよいでしょう。
-        if (user.role) {
-            token.role = user.role
-        }
+        token.role = (user as any).role; 
       }
       return token
     },
@@ -35,4 +37,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return !!auth
     },
   },
+  secret: process.env.AUTH_SECRET,
 })
