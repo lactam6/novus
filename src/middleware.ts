@@ -1,8 +1,10 @@
-import { auth } from "@/app/auth"
+import { authConfig } from "@/app/auth.config"; // 👈 軽量設定のパスを指定
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
+import NextAuth from "next-auth";
 
 export async function middleware(req: NextRequest) {
+  const { auth } = NextAuth(authConfig); 
   const session = await auth()
   const { pathname } = req.nextUrl
 
