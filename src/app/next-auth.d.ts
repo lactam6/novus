@@ -24,6 +24,6 @@ declare module "next-auth" {
 declare module "next-auth/jwt" {
   interface JWT {
     id: string; // JWTトークンにidを追加
-    role?: "admin" | "user"; // JWTトークンにroleを追加
+    role?: string; // JWTトークンにroleを追加
   }
 }
