@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from 'next/link'
 import {FaSearch, FaHome, FaBell} from "react-icons/fa"
 import {FaGear} from "react-icons/fa6"
-import {Button} from "@/components/ui/button"
 import { signOut } from "next-auth/react"
 import { useState } from 'react';
 import { SignOutButton } from '@/components/ui/signOutButton'; 

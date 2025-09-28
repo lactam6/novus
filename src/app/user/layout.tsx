@@ -1,7 +1,7 @@
 import { auth } from "@/app/auth"
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
+// import { Geist, Geist_Mono } from "next/font/google";
 
 export default async function Layout({ children }: { children: React.ReactNode }) {
   const session = await auth()
